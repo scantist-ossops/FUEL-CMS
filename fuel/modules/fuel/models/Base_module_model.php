@@ -341,7 +341,7 @@ class Base_module_model extends MY_Model {
 		{
 			return count($data);
 		}
-		//$this->debug_query();
+		
 		return $data;
 	}
 
@@ -429,7 +429,7 @@ class Base_module_model extends MY_Model {
 					{
 						if (strlen($v))
 						{
-							array_push($arrjoiner, $key.'='.$v);
+							array_push($arrjoiner, $key.'='.$this->db->escape($v));
 						}
 					}
 					if (!empty($arrjoiner))
@@ -442,7 +442,7 @@ class Base_module_model extends MY_Model {
 				{
 					//$method = ($joiner == 'or') ? 'or_like' : 'like';
 					//$this->db->$method('LOWER('.$key.')', strtolower($val), 'both');
-					array_push($$joiner_arr, 'LOWER('.$key.') LIKE "%'.strtolower($val).'%"');
+					array_push($$joiner_arr, 'LOWER('.$key.') LIKE "%'.strtolower($this->db->escape($val)).'%"');
 				}
 			}
 		}
